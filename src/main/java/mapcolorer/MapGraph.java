@@ -2,11 +2,13 @@ package mapcolorer;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MapGraph
 {
 	private HashMap countries = new HashMap<String, Country>();
-	private String name;
+	private String name = "";
 	
 	public MapGraph(String name)
 	{
@@ -57,6 +59,35 @@ public class MapGraph
 	public Country getCountry(String countryId)
 	{
 		return (Country)countries.get(countryId);
+	}
+	
+	public ArrayList<Country> getCountries()
+	{
+		Iterator it = countries.entrySet().iterator();
+		ArrayList<Country> nations = new ArrayList<Country>(countries.size());
+		while(it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			Country country = (Country)pair.getValue();
+			nations.add(country);
+		}
+		return nations;
+	}
+	
+	@Override
+	public String toString()
+	{
+		String contents = String.format("graph %s {\n", name);
+		for(Country c : getCountries()) {
+			String curName = c.getName();
+			for(Country n : c.getNeighbors()) {
+				if(!n.isEntered()) {
+					contents += String.format("\t%s -- %s\n", c.getName(), n.getName());
+				}
+			}
+			c.setEntered(true);
+		}
+		contents += "}\n";
+		return contents;
 	}
 }
 

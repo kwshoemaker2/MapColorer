@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = 'mapcolorer.MapColorer'
+mainClassName = 'mapcolorer.Main'
 
 sourceSets.main.java.srcDirs = ['src']
 
@@ -11,7 +11,7 @@ jar {
 	baseName = 'map-colorer'
 	version = '0.1.0'
 	manifest {
-		attributes 'Main-Class': 'mapcolorer.MapColorer'}
+		attributes 'Main-Class': 'mapcolorer.Main'}
 }
 
 task wrapper(type: Wrapper) {

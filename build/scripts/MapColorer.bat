@@ -72,7 +72,7 @@ set CMD_LINE_ARGS=%$
 set CLASSPATH=%APP_HOME%\lib\map-colorer-0.1.0.jar
 
 @rem Execute MapColorer
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %MAP_COLORER_OPTS%  -classpath "%CLASSPATH%" mapcolorer.MapColorer %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %MAP_COLORER_OPTS%  -classpath "%CLASSPATH%" mapcolorer.Main %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

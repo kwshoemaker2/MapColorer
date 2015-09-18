@@ -3,12 +3,14 @@ package mapcolorer;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 public class Country
 {
 	private final String name;
 	private HashMap neighbors = new HashMap<String, Country>();
 	private MapColor color = null;
+	private Boolean entered = false;
 	
 	public Country(String name)
 	{
@@ -37,10 +39,7 @@ public class Country
 	public int getCost()
 	{
 		int cost = 0;
-		Iterator it = neighbors.entrySet().iterator();
-		while(it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			Country neighbor = (Country)pair.getValue();
+		for(Country neighbor : getNeighbors()) {
 			if(neighbor.getColor() == null) {
 				cost += 1;
 			}
@@ -65,6 +64,28 @@ public class Country
 	public Boolean isNeighbor(Country c)
 	{
 		return neighbors.containsKey(c.getName());
+	}
+	
+	public ArrayList<Country> getNeighbors()
+	{
+		Iterator it = neighbors.entrySet().iterator();
+		ArrayList<Country> neighs = new ArrayList<Country>(neighbors.size());
+		while(it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			Country neighbor = (Country)pair.getValue();
+			neighs.add(neighbor);
+		}
+		return neighs;
+	}
+	
+	public Boolean isEntered()
+	{
+		return entered;
+	}
+	
+	public void setEntered(Boolean b)
+	{
+		entered = b;
 	}
 }
 
