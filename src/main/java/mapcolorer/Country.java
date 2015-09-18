@@ -1,10 +1,13 @@
+package mapcolorer;
+
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Country
 {
 	private final String name;
-	private Map neighbors = new HashMap<String, Country>();
+	private HashMap neighbors = new HashMap<String, Country>();
 	private MapColor color = null;
 	
 	public Country(String name)
@@ -12,7 +15,7 @@ public class Country
 		this.name = name;
 	}
 	
-	public string getName()
+	public String getName()
 	{
 		return name;
 	}
@@ -34,11 +37,12 @@ public class Country
 	public int getCost()
 	{
 		int cost = 0;
-		for(Map.Entry<String, Country> countryEntry : neighbors.entrySet()) {
-			if(countryEntry.getValue().getColor() == null) {
+		Iterator it = neighbors.entrySet().iterator();
+		while(it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			Country neighbor = (Country)pair.getValue();
+			if(neighbor.getColor() == null) {
 				cost += 1;
-			
-			} else {
 			}
 		}
 		
@@ -49,7 +53,12 @@ public class Country
 	{
 		String key = newNeighbor.getName();
 		if(!neighbors.containsKey(key)) {
-			neighbors.put(key, newNeighbor());
+			neighbors.put(key, newNeighbor);
+		
+		} else {
+			throw new IllegalArgumentException(
+			String.format(
+				"this country already has a neighbor by the name of {0}", key));
 		}
 	}
 }

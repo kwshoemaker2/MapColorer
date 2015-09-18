@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'mapcolorer.MapColorer'
+
+sourceSets.main.java.srcDirs = ['src']
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+	baseName = 'map-colorer'
+	version = '0.1.0'
+	manifest {
+		attributes 'Main-Class': 'mapcolorer.MapColorer'}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.3'
+}

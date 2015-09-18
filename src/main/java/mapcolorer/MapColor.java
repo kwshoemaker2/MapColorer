@@ -1,3 +1,5 @@
+package mapcolorer;
+
 public enum MapColor {
     RED("red"),
     BLUE("blue"),
@@ -6,7 +8,7 @@ public enum MapColor {
 
     private final String colorId;
 
-    public MapColor(String colorStr) {
+    MapColor(String colorStr) {
         colorId = colorStr;
     }
 
