@@ -1,8 +1,10 @@
 package mapcolorer;
 
-public class MapColorer
+public final class MapColorer
 {
-	public static void main(String [] args)
+	private MapColorer() {}
+	
+	public void ColorMap(MapGraph m)
 	{
 	}
 }

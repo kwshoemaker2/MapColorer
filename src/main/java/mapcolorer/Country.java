@@ -61,6 +61,11 @@ public class Country
 				"this country already has a neighbor by the name of {0}", key));
 		}
 	}
+	
+	public Boolean isNeighbor(Country c)
+	{
+		return neighbors.containsKey(c.getName());
+	}
 }
 
 
