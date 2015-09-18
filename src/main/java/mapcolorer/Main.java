@@ -27,8 +27,8 @@ public class Main
 		if(Files.exists(infilePath)) {
 			try {
 				ourMap = MapGraphCreator.createMapGraphFromText(Files.readAllLines(infilePath));
+				MapColorer.colorMap(ourMap);
 				Files.write(outfilePath, ourMap.toString().getBytes());
-				
 			} catch(IOException io_e) {
 				System.out.printf("An IOException occurred: %s", io_e);
 				return;

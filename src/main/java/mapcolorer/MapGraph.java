@@ -89,6 +89,11 @@ public class MapGraph
 		contents += "}\n";
 		return contents;
 	}
+	
+	public int size()
+	{
+		return countries.size();
+	}
 }
 
 
