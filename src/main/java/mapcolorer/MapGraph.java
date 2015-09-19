@@ -40,15 +40,8 @@ public class MapGraph
 		Country c1 = (Country)countries.get(countryId);
 		Country c2 = (Country)countries.get(neighId);
 		
-		if( !(c1.isNeighbor(c2) || c2.isNeighbor(c1)) ) { 
-			c1.addNeighbor(c2);
-			c2.addNeighbor(c1);
-		
-		} else {
-			throw new IllegalArgumentException(
-				String.format(
-					"{0} and {1} are already neighbors!", countryId, neighId));
-		}
+		c1.addNeighbor(c2);
+		c2.addNeighbor(c1);
 	}
 	
 	public Boolean hasCountry(Country c)

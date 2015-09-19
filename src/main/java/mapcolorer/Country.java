@@ -56,7 +56,7 @@ public class Country
 	public void addNeighbor(Country newNeighbor)
 	{
 		String key = newNeighbor.getName();
-		if(!neighbors.containsKey(key)) {
+		if(!neighbors.containsKey(key) && key != this.name) {
 			neighbors.put(key, newNeighbor);
 		
 		} else {
