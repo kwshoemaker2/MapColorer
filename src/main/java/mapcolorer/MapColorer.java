@@ -11,6 +11,8 @@ public final class MapColorer
 	{
 		PriorityQueue<Country> queue = new PriorityQueue<Country>(
 			m.size(), new CountryComparator());
+		
+		
 	}
 	
 	
