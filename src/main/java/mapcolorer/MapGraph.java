@@ -49,6 +49,11 @@ public class MapGraph
 		return countries.containsKey(c.getName());
 	}
 	
+	public Boolean hasCountry(String id)
+	{
+		return countries.containsKey(id);
+	}
+	
 	public Country getCountry(String countryId)
 	{
 		return (Country)countries.get(countryId);
@@ -81,6 +86,14 @@ public class MapGraph
 		}
 		contents += "}\n";
 		return contents;
+	}
+
+	public Boolean areNeighbors(String id1, String id2)
+	{
+		Country c1 = getCountry(id1);
+		Country c2 = getCountry(id2);
+		return c1.isNeighbor(c2) && c2.isNeighbor(c1);
+		
 	}
 	
 	public int size()
