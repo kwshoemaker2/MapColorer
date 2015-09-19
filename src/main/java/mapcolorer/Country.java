@@ -93,6 +93,38 @@ public class Country
 	{
 		entered = b;
 	}
+	
+	public Boolean canColor(MapColor color)
+	{
+		for(Country neigh : getNeighbors()) {
+			if(neigh.getColor() == color) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public ArrayList<MapColor> possibleColors()
+	{
+		ArrayList<MapColor> colors = new ArrayList<MapColor>();
+		ArrayList<Country> neighbors = getNeighbors();
+		
+		for(MapColor color : MapColor.values()) {
+			Boolean canInclude = true;
+			for(Country neigh : neighbors) {
+				if(neigh.getColor() == color) {
+					canInclude = false;
+					break;
+				}
+			}
+			if(canInclude) {
+				colors.add(color);
+			}
+		}
+		
+		return colors;
+	}
 }
 
 
