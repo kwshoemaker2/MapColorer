@@ -33,6 +33,7 @@ public class CountryTest
 		assertEquals("c1 cost is not 2!", 2, c1.getCost());
 		c2.changeColor(MapColor.RED);
 		assertEquals("c3 cost is not 1!", 1, c3.getCost());
+		c2.unColor();
 	}
 	
 	@Test
@@ -60,6 +61,49 @@ public class CountryTest
 		ArrayList<Country> c1_neighbors = c1.getNeighbors();
 		assertEquals("c2 is not in the neighbors list!", true, c1_neighbors.contains(c2));
 		assertEquals("c3 is not in the neighbors list!", true, c1_neighbors.contains(c3));
+	}
+	
+	@Test
+	public void canColorTest()
+	{
+		Boolean canColor = true;
+		for(MapColor color : MapColor.values()) {
+			canColor = canColor && c1.canColor(color);
+		}
+		
+		assertEquals("c1 should be allowed to be any color", true, canColor);
+		
+		
+		c2.changeColor(MapColor.RED);
+		
+		assertEquals("c1 cant be colored blue for some reason", true, c1.canColor(MapColor.BLUE));
+		assertEquals("c1 can be colored red for some reason", false, c1.canColor(MapColor.RED));
+		assertEquals("c2 can't be colored red for some reason", true, c2.canColor(MapColor.RED));
+		
+		c2.unColor();
+	}
+	
+	@Test
+	public void possibleColorsTest()
+	{
+		// make sure we can color any color initially
+		int colorAmount = MapColor.values().length;
+		assertEquals("c1 should be allowed to be any color", true, 
+					 c1.possibleColors().size() == colorAmount);
+		
+		// make sure we now can't use two colors
+		c2.changeColor(MapColor.GREEN);
+		c3.changeColor(MapColor.RED);
+		assertEquals("C1 should not be able to color itself two different colors", true,
+					 c1.possibleColors().size() == colorAmount - 2);
+		
+		// make sure this all actually worked
+		ArrayList<MapColor> colors = c1.possibleColors();
+		assertEquals("RED and GREEN should not be possible colors", false,
+					 colors.contains(MapColor.GREEN) || colors.contains(MapColor.RED));
+		
+		c2.unColor();
+		c3.unColor();
 	}
 }
 
