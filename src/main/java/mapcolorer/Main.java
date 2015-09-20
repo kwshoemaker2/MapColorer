@@ -14,30 +14,19 @@ public class Main
 		
 		} else if(args.length >= 1) {
 			infileName = args[0];
-			outfileName = "colored_" + infileName;
-			
 		}
+		
 		if(args.length >= 2) {
 			outfileName = args[1];
 		}
 		
-		Path infilePath = Paths.get(infileName);
-		Path outfilePath = Paths.get(outfileName);
-		MapGraph ourMap;
-		if(Files.exists(infilePath)) {
-			try {
-				ourMap = MapGraphCreator.createMapGraphFromText(Files.readAllLines(infilePath));
-				MapColorer.colorMap(ourMap);
-				Files.write(outfilePath, ourMap.toString().getBytes());
-			} catch(IOException io_e) {
-				System.out.printf("An IOException occurred: %s", io_e);
-				return;
-			}
+		try {
+			MapGraph ourMap = MapGraphCreator.createMapGraphFromFile(infileName);
 		
-		} else {
-			System.out.printf("The file %s does not exist!", infileName);
+		} catch (IllegalArgumentException | IOException e) {
+			System.out.println(e.getMessage());
 			return;
-		}	
+		}
 	}
 }
 

@@ -1,10 +1,25 @@
 package mapcolorer;
 import java.nio.file.*;
 import java.util.List;
+import java.io.IOException;
 
 public final class MapGraphCreator
 {
 	private MapGraphCreator() {}
+	
+	public static MapGraph createMapGraphFromFile(String filename) throws IOException
+	{
+		Path infilePath = Paths.get(filename);
+		MapGraph newMap;
+		
+		if(Files.exists(infilePath)) {
+			newMap = MapGraphCreator.createMapGraphFromText(Files.readAllLines(infilePath));
+		
+		} else {
+			throw new IOException(String.format("The file {0} does not exist!", filename));
+		}
+		return newMap;
+	}
 	
 	public static MapGraph createMapGraphFromText(List<String> fileLines)
 	{
