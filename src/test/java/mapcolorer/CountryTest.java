@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class CountryTest
 {
@@ -122,6 +123,18 @@ public class CountryTest
 		assertEquals("Should be 0", 0, countryCompr.compare(c1, c2));
 		c2.changeColor(MapColor.RED);
 		assertEquals("C1 should have a lower score than C2", -1, countryCompr.compare(c1, c2));
+	}
+	
+	@Test
+	public void priorityQueueTest()
+	{
+		PriorityQueue<Country> queue = new PriorityQueue<Country>(3, new CountryComparator());
+		c2.changeColor(MapColor.RED);
+		c3.changeColor(MapColor.GREEN);
+		queue.add(c2);
+		queue.add(c3);
+		queue.add(c1);
+		assertEquals("C1 should be removed first", c1, queue.poll());
 	}
 }
 

@@ -2,6 +2,7 @@ package mapcolorer;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 public final class MapColorer
 {
@@ -12,7 +13,40 @@ public final class MapColorer
 		PriorityQueue<Country> queue = new PriorityQueue<Country>(
 			m.size(), new CountryComparator());
 		
+		Country curCountry;
+		queue.add(findSmallest(m));
 		
+		while(queue.size() > 0) {
+			curCountry = queue.poll();
+			ArrayList<Country> neighbors = curCountry.getNeighbors();
+			for(Country neigh : neighbors) {
+				if( !(queue.contains(neigh) || neigh.getColor() != null)) {
+					queue.add(neigh);
+				}
+			}
+			
+			ArrayList<MapColor> possibleColors = curCountry.possibleColors();
+			if(possibleColors.size() > 0) {
+				curCountry.changeColor(possibleColors[0]);
+			
+			} else {
+				System.out.println("This algorithm doesn't work!!!");
+				break;
+			}
+		}
+	}
+	
+	private static Country findSmallest(MapGraph m)
+	{
+		ArrayList<Country> countries = m.getCountries();
+		Country smallest = countries[0];
+		for(Country country : countries) {
+			if(country.getCost() < smallest.getCost()) {
+				smallest = country;
+			}
+		}
+		
+		return smallest;
 	}
 	
 	
