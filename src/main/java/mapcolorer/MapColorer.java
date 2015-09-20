@@ -33,7 +33,47 @@ class CountryComparator implements Comparator<Country>
 			return 1;
 		
 		} else {
-			return 0;
+			int c1ColorsSize = c1.possibleColors().size();
+			int c2ColorsSize = c2.possibleColors().size();
+			if(c1ColorsSize < c2ColorsSize) {
+				return -1;
+			
+			} else if(c1ColorsSize > c2ColorsSize) {
+				return 1;
+			
+			} else {
+				return 0;
+			}
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

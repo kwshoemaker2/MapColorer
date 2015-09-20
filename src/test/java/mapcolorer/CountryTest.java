@@ -2,8 +2,8 @@ package mapcolorer;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
+//import org.junit.BeforeClass;
+import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -25,6 +25,14 @@ public class CountryTest
 		
 		c3.addNeighbor(c1);
 		c3.addNeighbor(c2);
+	}
+	
+	@After
+	public void unColor_All()
+	{
+		c1.unColor();
+		c2.unColor();
+		c3.unColor();
 	}
 	
 	@Test
@@ -104,6 +112,16 @@ public class CountryTest
 		
 		c2.unColor();
 		c3.unColor();
+	}
+	
+	@Test
+	public void CountryComparatorTest()
+	{
+		CountryComparator countryCompr = new CountryComparator();
+		assertEquals("C1 and C2 should have same cost", true, c1.getCost() == c2.getCost());
+		assertEquals("Should be 0", 0, countryCompr.compare(c1, c2));
+		c2.changeColor(MapColor.RED);
+		assertEquals("C1 should have a lower score than C2", -1, countryCompr.compare(c1, c2));
 	}
 }
 
