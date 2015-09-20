@@ -27,7 +27,7 @@ public final class MapColorer
 			
 			ArrayList<MapColor> possibleColors = curCountry.possibleColors();
 			if(possibleColors.size() > 0) {
-				curCountry.changeColor(possibleColors[0]);
+				curCountry.changeColor(possibleColors.get(0));
 			
 			} else {
 				System.out.println("This algorithm doesn't work!!!");
@@ -39,7 +39,7 @@ public final class MapColorer
 	private static Country findSmallest(MapGraph m)
 	{
 		ArrayList<Country> countries = m.getCountries();
-		Country smallest = countries[0];
+		Country smallest = countries.get(0);
 		for(Country country : countries) {
 			if(country.getCost() < smallest.getCost()) {
 				smallest = country;
