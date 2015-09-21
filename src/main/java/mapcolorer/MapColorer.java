@@ -7,22 +7,18 @@ import java.util.ArrayList;
 public final class MapColorer
 {
 	private MapColorer() {}
-	
+
 	public static void colorMap(MapGraph m)
 	{
 		PriorityQueue<Country> queue = new PriorityQueue<Country>(
 			m.size(), new CountryComparator());
 		
-		Country curCountry;
-		//curCountry.setVisited(true);
-		for(Country c : m.getCountries()) {
-			queue.add(c);
-		}
-		//queue.add(curCountry);
+		Country curCountry = findLargest(m);
+		curCountry.setVisited(true);
+		queue.add(curCountry);
 		
 		while(queue.size() > 0) {
 			curCountry = queue.poll();
-			/*
 			ArrayList<Country> neighbors = curCountry.getNeighbors();
 			for(Country neigh : neighbors) {
 				if(neigh.isVisited() == false && neigh.getColor() == null) {
@@ -30,7 +26,6 @@ public final class MapColorer
 					neigh.setVisited(true);
 				}
 			}
-			*/
 			ArrayList<MapColor> possibleColors = curCountry.possibleColors();
 			if(possibleColors.size() > 0) {
 				curCountry.changeColor(possibleColors.get(0));
@@ -40,7 +35,30 @@ public final class MapColorer
 									"country %s has no available colors", curCountry.getName()));
 			}
 		}
-	}
+	}	
+/*
+	public static void colorMap(MapGraph m)
+	{
+		PriorityQueue<Country> queue = new PriorityQueue<Country>(
+			m.size(), new CountryComparator());
+		
+		Country curCountry;
+		for(Country c : m.getCountries()) {
+			queue.add(c);
+		}
+		
+		while(queue.size() > 0) {
+			curCountry = queue.poll();
+			ArrayList<MapColor> possibleColors = curCountry.possibleColors();
+			if(possibleColors.size() > 0) {
+				curCountry.changeColor(possibleColors.get(0));
+			
+			} else {
+				System.out.println(String.format(
+									"country %s has no available colors", curCountry.getName()));
+			}
+		}
+	}*/
 	
 	private static Country findSmallest(MapGraph m)
 	{
@@ -55,6 +73,18 @@ public final class MapColorer
 		return smallest;
 	}
 	
+	private static Country findLargest(MapGraph m)
+	{
+		ArrayList<Country> countries = m.getCountries();
+		Country largest = countries.get(0);
+		for(Country country : countries) {
+			if(largest.numberOfNeighbors() < country.numberOfNeighbors()) {
+				largest = country;
+			}
+		}
+		
+		return largest;
+	}
 	
 }
 
