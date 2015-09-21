@@ -1,0 +1,9 @@
+graph PNW {
+	ID -- WA
+	ID -- MT
+	ID -- OR
+	WA -- OR
+	WA -- BC
+	ID -- WY
+	MT -- WY
+}

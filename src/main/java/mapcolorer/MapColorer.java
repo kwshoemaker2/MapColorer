@@ -14,6 +14,11 @@ public final class MapColorer
 			m.size(), new CountryComparator());
 		
 		Country curCountry = findLargest(m);
+		
+		if(m.size() == 1) { // the algorithm doesn't run at all for some reason in this case...
+			curCountry.changeColor(MapColor.RED);
+			return;
+		}
 		curCountry.setVisited(true);
 		queue.add(curCountry);
 		
@@ -41,8 +46,9 @@ public final class MapColorer
 	{
 		ArrayList<Country> countries = m.getCountries();
 		Country largest = countries.get(0);
+		CountryComparator cc = new CountryComparator();
 		for(Country country : countries) {
-			if(largest.numberOfNeighbors() < country.numberOfNeighbors()) {
+			if(cc.compare(largest, country) == 1) {
 				largest = country;
 			}
 		}

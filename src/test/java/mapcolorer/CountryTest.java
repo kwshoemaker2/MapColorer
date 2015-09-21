@@ -37,15 +37,6 @@ public class CountryTest
 	}
 	
 	@Test
-	public void getCostTest()
-	{	
-		assertEquals("c1 cost is not 2!", 2, c1.getCost());
-		c2.changeColor(MapColor.RED);
-		assertEquals("c3 cost is not 1!", 1, c3.getCost());
-		c2.unColor();
-	}
-	
-	@Test
 	public void addNeighborTest()
 	{
 		assertEquals("c2 didn't get added as neighbor!", true, c1.isNeighbor(c2));
@@ -119,7 +110,6 @@ public class CountryTest
 	public void CountryComparatorTest()
 	{
 		CountryComparator countryCompr = new CountryComparator();
-		assertEquals("C1 and C2 should have same cost", true, c1.getCost() == c2.getCost());
 		assertEquals("Should be 0", 0, countryCompr.compare(c1, c2));
 		c2.changeColor(MapColor.RED);
 		assertEquals("C1 should have a lower score than C2", -1, countryCompr.compare(c1, c2));

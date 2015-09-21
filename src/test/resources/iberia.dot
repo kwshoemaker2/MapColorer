@@ -1,0 +1,4 @@
+graph iberia {
+	Spain -- Portugal
+	Spain -- Andorra
+}
