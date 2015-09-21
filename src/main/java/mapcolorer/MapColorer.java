@@ -35,42 +35,6 @@ public final class MapColorer
 									"country %s has no available colors", curCountry.getName()));
 			}
 		}
-	}	
-/*
-	public static void colorMap(MapGraph m)
-	{
-		PriorityQueue<Country> queue = new PriorityQueue<Country>(
-			m.size(), new CountryComparator());
-		
-		Country curCountry;
-		for(Country c : m.getCountries()) {
-			queue.add(c);
-		}
-		
-		while(queue.size() > 0) {
-			curCountry = queue.poll();
-			ArrayList<MapColor> possibleColors = curCountry.possibleColors();
-			if(possibleColors.size() > 0) {
-				curCountry.changeColor(possibleColors.get(0));
-			
-			} else {
-				System.out.println(String.format(
-									"country %s has no available colors", curCountry.getName()));
-			}
-		}
-	}*/
-	
-	private static Country findSmallest(MapGraph m)
-	{
-		ArrayList<Country> countries = m.getCountries();
-		Country smallest = countries.get(0);
-		for(Country country : countries) {
-			if(country.getCost() < smallest.getCost()) {
-				smallest = country;
-			}
-		}
-		
-		return smallest;
 	}
 	
 	private static Country findLargest(MapGraph m)
@@ -90,6 +54,10 @@ public final class MapColorer
 
 class CountryComparator implements Comparator<Country>
 {
+	/** The heuristic is designed to color countries that border a lot of others first
+	  * since the problem with the old heuristic, which did the opposite, was that
+	  * the countries with the most borders ran out of colors to use
+	  */
 	@Override
 	public int compare(Country c1, Country c2)
 	{
@@ -102,6 +70,7 @@ class CountryComparator implements Comparator<Country>
 		} else if(c1Cost > c2Cost) {
 			return -1;
 		
+		// if they're both the same then go with the one that has fewer available colors to use
 		} else {
 			int c1ColorsSize = c1.possibleColors().size();
 			int c2ColorsSize = c2.possibleColors().size();

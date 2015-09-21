@@ -31,7 +31,6 @@ public final class MapGraphCreator
 		
 		for(int i = 1; i < fileLines.size(); i++) {
 			String line = fileLines.get(i).replaceAll("[\\s]", "");
-			System.out.println(line);
 			String[] stuff = line.split("--");
 			if(stuff.length >= 2) {
 				String id1 = stuff[0];
@@ -49,17 +48,9 @@ public final class MapGraphCreator
 		
 		if(stuff.length > 1) {
 			String name = stuff[1].replaceAll(" ", "").replace("{", "");
-			System.out.printf("our name is: %s", name);
 			return name;
 		}
 		return "";
-	}
-	
-	private static void outputLines(List<String> fileLines)
-	{
-		for(String line : fileLines) {
-			System.out.println(line);
-		}
 	}
 }
 

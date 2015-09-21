@@ -14,7 +14,11 @@ public class Main
 		
 		} else if(args.length >= 1) {
 			infileName = args[0];
-			outfileName = "a.dot";
+			Path p = Paths.get(infileName);
+			if(p.getParent() != null) {
+				outfileName = p.getParent().toString();
+			}
+			outfileName += "colored_" + p.getFileName().toString();
 		}
 		
 		if(args.length >= 2) {
