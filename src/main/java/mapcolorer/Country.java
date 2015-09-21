@@ -11,6 +11,7 @@ public class Country
 	private HashMap neighbors = new HashMap<String, Country>();
 	private MapColor color = null;
 	private Boolean entered = false;
+	private Boolean visited = false;
 	
 	public Country(String name)
 	{
@@ -124,6 +125,21 @@ public class Country
 		}
 		
 		return colors;
+	}
+	
+	public int numberOfNeighbors()
+	{
+		return neighbors.size();
+	}
+	
+	public Boolean isVisited()
+	{
+		return visited;
+	}
+	
+	public void setVisited(Boolean v)
+	{
+		visited = v;
 	}
 }
 

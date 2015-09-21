@@ -83,6 +83,10 @@ public class MapGraph
 				}
 			}
 			c.setEntered(true);
+			if(c.getColor() != null) {
+				contents += String.format("\t%s[style = filled, fillcolor = %s]\n", 
+											c.getName(), c.getColor().getId());
+			}
 		}
 		contents += "}\n";
 		return contents;

@@ -23,15 +23,21 @@ public class MapColorerTest
 		mg2.addNeighbors("ID", "OR");
 		mg2.addNeighbors("ID", "WA");
 		mg2.addNeighbors("OR", "WA");
+		
+		//testGraphs.add(mg1);
+		testGraphs.add(mg2);
 	}
 	
 	@Test
+	@Ignore
 	public void colorMapTest()
 	{
 		for(MapGraph testMapGraph : testGraphs) {
 			for(Country country : testMapGraph.getCountries()) {
 				MapColor countryColor = country.getColor();
-				assertEquals("The country should have a color", true, countryColor != null);
+				assertEquals("The country " + country.getName() + " should have a color", 
+							true, countryColor != null);
+							
 				assertEquals("The country should be able to actually be this color",
 							 true,
 							 country.canColor(countryColor));

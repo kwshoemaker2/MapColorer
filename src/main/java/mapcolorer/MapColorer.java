@@ -14,24 +14,30 @@ public final class MapColorer
 			m.size(), new CountryComparator());
 		
 		Country curCountry;
-		queue.add(findSmallest(m));
+		//curCountry.setVisited(true);
+		for(Country c : m.getCountries()) {
+			queue.add(c);
+		}
+		//queue.add(curCountry);
 		
 		while(queue.size() > 0) {
 			curCountry = queue.poll();
+			/*
 			ArrayList<Country> neighbors = curCountry.getNeighbors();
 			for(Country neigh : neighbors) {
-				if( !(queue.contains(neigh) || neigh.getColor() != null)) {
+				if(neigh.isVisited() == false && neigh.getColor() == null) {
 					queue.add(neigh);
+					neigh.setVisited(true);
 				}
 			}
-			
+			*/
 			ArrayList<MapColor> possibleColors = curCountry.possibleColors();
 			if(possibleColors.size() > 0) {
 				curCountry.changeColor(possibleColors.get(0));
 			
 			} else {
-				System.out.println("This algorithm doesn't work!!!");
-				break;
+				System.out.println(String.format(
+									"country %s has no available colors", curCountry.getName()));
 			}
 		}
 	}
@@ -57,14 +63,14 @@ class CountryComparator implements Comparator<Country>
 	@Override
 	public int compare(Country c1, Country c2)
 	{
-		int c1Cost = c1.getCost();
-		int c2Cost = c2.getCost();
+		int c1Cost = c1.numberOfNeighbors();
+		int c2Cost = c2.numberOfNeighbors();
 		
 		if(c1Cost < c2Cost) {
-			return -1;
+			return 1;
 		
 		} else if(c1Cost > c2Cost) {
-			return 1;
+			return -1;
 		
 		} else {
 			int c1ColorsSize = c1.possibleColors().size();

@@ -14,6 +14,7 @@ public class Main
 		
 		} else if(args.length >= 1) {
 			infileName = args[0];
+			outfileName = "a.dot";
 		}
 		
 		if(args.length >= 2) {
@@ -22,6 +23,9 @@ public class Main
 		
 		try {
 			MapGraph ourMap = MapGraphCreator.createMapGraphFromFile(infileName);
+			MapColorer.colorMap(ourMap);
+			Path outfilePath = Paths.get(outfileName);
+			Files.write(outfilePath, ourMap.toString().getBytes());
 		
 		} catch (IllegalArgumentException | IOException e) {
 			System.out.println(e.getMessage());
